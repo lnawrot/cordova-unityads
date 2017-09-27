@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-unityads"
+    version="1.0.0">
+
+    <name>Cordova UnityAds</name>
+    <description>UnityAds rewarded video plugin</description>
+    <author>Łukasz Nawrot</author>
+    <license>MIT</license>
+    <keywords>cordova,plugin,ad,rewardedvideo,unityads</keywords>
+    <repo>https://github.com/lnawrot/cordova-unityads</repo>
+    <issue>https://github.com/lnawrot/cordova-unityads/issues</issue>
+
+	<engines>
+	    <engine name="cordova" version=">=6.0" />
+	</engines>
+
+    <js-module src="www/unityads.js" name="unityads">
+      <clobbers target="window.UnityAds" />
+    </js-module>
+
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="UnityAdsPlugin">
+				<param name="android-package" value="me.nawrot.cordova.plugin.unityads.UnityAdsPlugin"/>
+			</feature>
+		</config-file>
+
+		<source-file src="src/android/UnityAdsPlugin.java" target-dir="src/me/nawrot/cordova/plugin/unityads" />
+    <source-file src="src/android/Actions.java" target-dir="src/me/nawrot/cordova/plugin/unityads" />
+    <source-file src="src/android/UnityAdsListener.java" target-dir="src/me/nawrot/cordova/plugin/unityads" />
+
+    <framework src="unity-ads.gradle" custom="true" type="gradleReference" />
+    <resource-file src="unity-ads.aar" target="libs/unity-ads.aar" />
+	</platform>
+
+
+    <platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="UnityAdsPlugin">
+				<param name="ios-package" value="UnityAdsPlugin" />
+			</feature>
+		</config-file>
+
+    	<header-file src="src/ios/UnityAdsPlugin.h" />
+    	<source-file src="src/ios/UnityAdsPlugin.m" />
+
+        <framework src="UnityAds.framework" custom="true" />
+    </platform>
+</plugin>
